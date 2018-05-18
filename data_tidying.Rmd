@@ -64,3 +64,22 @@ head(annual_catch, 30)
 ```
 
 
+Read in Regions definitions table and select code and management area columns
+
+```{r}
+region_defs <- read.csv(url("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/df35b.303.1", method = "libcurl"),
+                        stringsAsFactors = FALSE) %>% 
+
+  select(code, mgmtArea)
+```
+
+```{r}
+
+catch_joined <- left_join(catch_df, region_defs, by = c("Region" = "code"))
+
+head(catch_joined)
+
+```
+
+
+
